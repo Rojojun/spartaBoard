@@ -1,5 +1,6 @@
 package com.sparta.week3mission.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,16 +13,18 @@ public class Board extends Timestamped { // 생성, 수정 시간을 위해 확�
     @GeneratedValue(strategy = GenerationType.AUTO) // id의 값을 만들어주는데 자동으로 만들어주라~
     @Id
     private Long id;
-
+    @JsonIgnore
+    @Column(nullable = false)
+    private String password;
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)
     private String username;
-
     @Column(nullable = false)
     private String contents;
 
-    public Board(String title ,String username, String contents){
+    public Board(String password, String title ,String username, String contents){
+        this.password = password;
         this.title = title;
         this.username = username;
         this.contents = contents;
@@ -31,11 +34,13 @@ public class Board extends Timestamped { // 생성, 수정 시간을 위해 확�
         this.title = requestDto.getTitle();
         this.username = requestDto.getUsername();
         this.contents = requestDto.getContents();
+        this.password = requestDto.getPassword();
     }
 
-    public void Board(BoardRequestDto requestDto) {
+    public void update(BoardRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.username = requestDto.getUsername();
         this.contents = requestDto.getContents();
+        this.password = requestDto.getPassword();
     }
 }

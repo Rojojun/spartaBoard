@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="EUC-KR">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <title>포켓몬 친구들과 화이팅</title>
+</head>
+<body>
+<header>
+    <div class="title">
+        <h1>게시판</h1>
+        <h4>당신의 의견을 자유롭게 적어 주세요</h4>
+        <button id="openModalBtn" onclick="open_box()" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">글 등록하기
+        </button>
+    </div>
+    <!-- 모달 영역 -->
+    <div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">게시글 등록하기</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input id="username" type="text" class="form-control" placeholder="name@example.com">
+                        <label>닉네임</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input id="contents-title" type="text" class="form-control" placeholder="name@example.com">
+                        <label>제목</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input id="password" type="password" class="form-control" placeholder="name@example.com">
+                        <label>비밀번호</label>
+                    </div>
+                    <div class="mb-3">
+                        <textarea id="content" class="form-control" placeholder="게시글을 180자 미만으로 입력해주세요"
+                                  rows="3"></textarea>
+                        <label for="content"></label>
+                    </div>
+                    <div class="mybtns modal-footer">
+                        <button onclick="posting()" type="button" class="btn btn-primary">업로드</button>
+                        <button onclick="close_box()" type="button" class="btn btn-outline-primary" id="closeModalBtn">
+                            닫기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--모달 스크립트 위치 수정 금지-->
+    <script>
+        // 모달 버튼에 이벤트를 건다.
+        $('#openModalBtn').on('click', function () {
+            $('#modalBox').modal('show');
+        });
+        // 모달 안의 취소 버튼에 이벤트를 건다.
+        $('#closeModalBtn').on('click', function () {
+            $('#modalBox').modal('hide');
+        });
+    </script>
+</header>
+<!--card 시작-->
+<div class="card">
+    <div class="card-body">
+        <!-- date/title/username 영역 -->
+        <h5 class="card-title contents-title" id="1-username">??바나나?님이 올렸다</h5>
+        <h6 class="card-subtitle mb-2 text-muted username">??바나나?</h6>
+        <h6 class="card-subtitle mb-2 text-muted date">May 23, 2022</h6>
+        <!-- contents 조회/수정 영역-->
+        <div class="contents">
+            <p id="1-contents" class="card-text text">올라~ 반갑다~ 내이름은 ?f?f?f바나나?f</p>
+            <div id="1-editarea" class="card-text edit">
+                <textarea class="te-edit" id="1-textarea" name="" cols="30" rows="5"></textarea>
+            </div>
+            <!-- 버튼 영역-->
+            <div class="footer">
+                <button type="button" class="btn btn-primary" id="1-edit" onclick="editPost()"
+                        class="icon-start-edit">Edit
+                </button>
+                <button type="button" class="btn btn-primary" id="1-delete" onclick="deleteOne()"
+                        class="icon-delete">Delete
+                </button>
+                <button type="button" class="btn btn-primary" id="1-submit" onclick="submitEdit()"
+                        class="icon-end-edit">Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
